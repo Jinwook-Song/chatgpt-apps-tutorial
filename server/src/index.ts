@@ -2,13 +2,24 @@ import { registerAppResource, registerAppTool, RESOURCE_MIME_TYPE } from '@model
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { createMcpHandler } from 'agents/mcp';
 import z from 'zod';
+import {
+	fetchMovieByGenre,
+	fetchMovieDetails,
+	fetchMovieGenres,
+	fetchMovieReviews,
+	fetchNowPlayingMovies,
+	fetchSimilarMovies,
+	fetchUpcomingMovies,
+} from './fetcher';
 
 const WIDGET_URI = 'ui://movies-widget';
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
+		const API_KEY = env.API_KEY;
+
 		const server = new McpServer({
-			name: 'Dev Env',
+			name: 'Movies',
 			version: '1.0',
 		});
 
@@ -43,9 +54,10 @@ export default {
 				},
 			},
 			async () => {
-				// fetch from the api
+				const movies = await fetchUpcomingMovies(API_KEY);
 				return {
 					content: [{ text: 'stuff', type: 'text' }],
+					structuredContent: { movies },
 				};
 			},
 		);
@@ -68,9 +80,10 @@ export default {
 				},
 			},
 			async () => {
-				// fetch from the api
+				const movies = await fetchNowPlayingMovies(API_KEY);
 				return {
 					content: [{ text: 'stuff', type: 'text' }],
+					structuredContent: { movies },
 				};
 			},
 		);
@@ -99,10 +112,11 @@ export default {
 					'openai/toolInvocation/invoked': 'Done.',
 				},
 			},
-			async () => {
-				// fetch from the api
+			async ({ movieId }) => {
+				const movies = await fetchSimilarMovies(movieId, API_KEY);
 				return {
 					content: [{ text: 'stuff', type: 'text' }],
+					structuredContent: { movies },
 				};
 			},
 		);
@@ -128,10 +142,11 @@ export default {
 					'openai/toolInvocation/invoked': 'Done.',
 				},
 			},
-			async () => {
-				// fetch from the api
+			async ({ movieId }) => {
+				const movies = await fetchMovieReviews(movieId, API_KEY);
 				return {
 					content: [{ text: 'stuff', type: 'text' }],
+					structuredContent: { movies },
 				};
 			},
 		);
@@ -151,9 +166,10 @@ export default {
 				},
 			},
 			async () => {
-				// fetch from the api
+				const genres = await fetchMovieGenres(API_KEY);
 				return {
 					content: [{ text: 'stuff', type: 'text' }],
+					structuredContent: { genres },
 				};
 			},
 		);
@@ -182,10 +198,11 @@ export default {
 					'openai/toolInvocation/invoked': 'Done.',
 				},
 			},
-			async () => {
-				// fetch from the api
+			async ({ genreId }) => {
+				const movies = await fetchMovieByGenre(genreId, API_KEY);
 				return {
 					content: [{ text: 'stuff', type: 'text' }],
+					structuredContent: { movies },
 				};
 			},
 		);
@@ -209,10 +226,11 @@ export default {
 					'openai/toolInvocation/invoked': 'Done.',
 				},
 			},
-			async () => {
-				// fetch from the api
+			async ({ movieId }) => {
+				const movie = await fetchMovieDetails(movieId, API_KEY);
 				return {
 					content: [{ text: 'stuff', type: 'text' }],
+					structuredContent: { movie },
 				};
 			},
 		);
