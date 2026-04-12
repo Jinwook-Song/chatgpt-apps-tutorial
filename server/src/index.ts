@@ -31,6 +31,19 @@ export default {
 						uri: WIDGET_URI,
 						text: await html.text(),
 						mimeType: RESOURCE_MIME_TYPE,
+						_meta: {
+							ui: {
+								csp: {
+									connectDomains: ['https://*.workers.dev'],
+									resourceDomains: [
+										'https://*.workers.dev',
+										'https://fonts.googleapis.com',
+										'https://fonts.gstatic.com',
+										'https://image.tmdb.org',
+									],
+								},
+							},
+						},
 					},
 				],
 			};
