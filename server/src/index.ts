@@ -19,7 +19,7 @@ export default {
 		const API_KEY = env.API_KEY;
 
 		const server = new McpServer({
-			name: 'Movies',
+			name: 'Movies Server',
 			version: '1.0',
 		});
 
@@ -145,8 +145,7 @@ export default {
 			async ({ movieId }) => {
 				const movies = await fetchMovieReviews(movieId, API_KEY);
 				return {
-					content: [{ text: 'stuff', type: 'text' }],
-					structuredContent: { movies },
+					content: [{ text: JSON.stringify(movies), type: 'text' }],
 				};
 			},
 		);
@@ -168,8 +167,7 @@ export default {
 			async () => {
 				const genres = await fetchMovieGenres(API_KEY);
 				return {
-					content: [{ text: 'stuff', type: 'text' }],
-					structuredContent: { genres },
+					content: [{ text: JSON.stringify(genres), type: 'text' }],
 				};
 			},
 		);
