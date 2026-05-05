@@ -4,7 +4,7 @@ import { useState } from "react";
 import { type ToolOutput } from "./types";
 
 function App() {
-  const [toolOutput, setToolOutput] = useState<ToolOutput | null>(null);
+  const [, setToolOutput] = useState<ToolOutput | null>(null);
 
   const { app, error } = useApp({
     appInfo: { name: "Workouts Client", version: "1.0" },
