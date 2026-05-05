@@ -8,7 +8,8 @@
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
 		"test": "vitest",
-		"cf-typegen": "wrangler types"
+		"cf-typegen": "wrangler types",
+		"db:generate": "drizzle-kit generate"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.12.4",
@@ -21,6 +22,8 @@
 		"@modelcontextprotocol/ext-apps": "^1.5.0",
 		"@modelcontextprotocol/sdk": "^1.29.0",
 		"agents": "^0.10.1",
+		"drizzle-kit": "^0.31.10",
+		"drizzle-orm": "^0.45.2",
 		"zod": "^4.3.6"
 	}
 }
