@@ -11,19 +11,19 @@
 		"enabled": true,
 	},
 	"upload_source_maps": true,
-	"compatibility_flags": [
-		"nodejs_compat"
-	],
+	"compatibility_flags": ["nodejs_compat"],
 	"assets": {
 		"directory": "dist",
 		"binding": "ASSETS",
 	},
-	"kv_namespaces": [
+	"d1_databases": [
 		{
-			"binding": "FLASHCARDS_KV",
-			"id": "f12c806a98c94030a1fda30aa93c7e0c",
-			"remote": true
-		}
+			"binding": "DB",
+			"database_name": "workouts_database",
+			"database_id": "1588c7e7-b4ba-4b53-b99c-19658a1afc0d",
+			"remote": true,
+			"migrations_dir": "drizzle",
+		},
 	],
 	/**
 	 * Smart Placement
